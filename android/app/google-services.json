@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1044409971427",
+    "project_id": "fir-project-f865e",
+    "storage_bucket": "fir-project-f865e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1044409971427:android:8288719d9bd75b062a8bd6",
+        "android_client_info": {
+          "package_name": "com.example.auth_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4m-YRjg2yAsG9a7vBT0oqlrPAHtrVXMo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1044409971427:android:cd9c6f4fbc49f3362a8bd6",
+        "android_client_info": {
+          "package_name": "com.example.flash_chat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4m-YRjg2yAsG9a7vBT0oqlrPAHtrVXMo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
