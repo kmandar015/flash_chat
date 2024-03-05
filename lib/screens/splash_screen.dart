@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   startTimer() {
-    var duration = Duration(seconds: 5);
+    var duration = Duration(seconds: 2);
     return Timer(
       duration,
       () => Navigator.pushReplacementNamed(context, RegistrationScreen.id),
@@ -31,9 +31,15 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
+        decoration: BoxDecoration(
+          color: Color(0xFF305A6F), //#305a6f
+        ),
         child: Center(
           child: Lottie.asset(
             'images/splash_animation.json',
+            fit: BoxFit.cover,
+            frameRate: FrameRate.max,
+            repeat: false,
           ),
         ),
       ),

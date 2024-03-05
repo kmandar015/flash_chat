@@ -19,7 +19,9 @@ void main() async {
   // } catch (e) {
   //   log('Error initializing Firebase: $e');
   // }
-  runApp(FlashChat());
+  runApp(
+    FlashChat(),
+  );
 }
 
 class FlashChat extends StatefulWidget {

@@ -138,6 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           textAlign: TextAlign.right,
                           style: TextStyle(
                             decoration: TextDecoration.underline,
+                            color: Color(0xFF305A6F),
                           ),
                         ),
                       ),
@@ -153,7 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     minWidth: size.width,
                     height: 50,
-                    color: Colors.purple,
+                    color: Color(0xFF305A6F),
                     onPressed: () {
                       // todo Login
                     },
@@ -175,7 +176,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: () {
                             Navigator.pushNamed(context, RegistrationScreen.id);
                           },
-                          child: Text('Register'),
+                          child: Text(
+                            'Register',
+                            style: TextStyle(
+                              color: Color(0xFF305A6F),
+                            ),
+                          ),
                         ),
                       ],
                     ),

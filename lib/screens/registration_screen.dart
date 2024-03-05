@@ -190,7 +190,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     ),
                     minWidth: size.width,
                     height: 50,
-                    color: Colors.purple,
+                    color: Color(0xFF305A6F),
                     onPressed: () {
                       // todo Registration
                     },
@@ -212,7 +212,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           onPressed: () {
                             Navigator.pushNamed(context, LoginScreen.id);
                           },
-                          child: Text('Login'),
+                          child: Text(
+                            'Login',
+                            style: TextStyle(
+                              color: Color(0xFF305A6F),
+                            ),
+                          ),
                         ),
                       ],
                     ),
