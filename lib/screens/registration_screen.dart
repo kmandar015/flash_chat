@@ -1,4 +1,6 @@
+import 'package:flash_chat/services/login.dart';
 import 'package:flutter/material.dart';
+
 import 'package:rive/rive.dart';
 
 import 'package:flash_chat/screens/login_screen.dart';
@@ -13,7 +15,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   late String email;
   late String password;
 
-  bool spinner = false;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController cpasswordController = TextEditingController();
+
   StateMachineController? controller;
 
   SMIInput<bool>? isChecking;
@@ -83,6 +88,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     height: 10,
                   ),
                   TextField(
+                    controller: emailController,
                     onChanged: (value) {
                       if (handsUp != null) {
                         handsUp!.change(false);
@@ -111,6 +117,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     height: 10,
                   ),
                   TextField(
+                    controller: passwordController,
                     onChanged: (value) {
                       if (isChecking != null) {
                         isChecking!.change(false);
@@ -150,6 +157,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     height: 10,
                   ),
                   TextField(
+                    controller: cpasswordController,
                     onChanged: (value) {
                       if (isChecking != null) {
                         isChecking!.change(false);
@@ -193,6 +201,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     color: Color(0xFF305A6F),
                     onPressed: () {
                       // todo Registration
+                      createAccount(emailController, passwordController,
+                          cpasswordController, context);
                     },
                     child: Text(
                       "Register",

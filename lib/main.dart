@@ -1,7 +1,7 @@
-// import 'dart:developer';
+import 'dart:developer';
 
-// import 'package:firebase_core/firebase_core.dart';
-// import 'package:flash_chat/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flash_chat/firebase_options.dart';
 // import 'package:flash_chat/screens/registration_screen.dart';
 import 'package:flash_chat/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -9,19 +9,18 @@ import 'package:flutter/material.dart';
 import 'package:flash_chat/my_routes.dart';
 
 void main() async {
-  // try {
-  //   WidgetsFlutterBinding.ensureInitialized();
-  //   await Firebase.initializeApp(
-  //     options: DefaultFirebaseOptions.currentPlatform,
-  //   );
-  //   log('Firebase initialized successfully');
-
-  // } catch (e) {
-  //   log('Error initializing Firebase: $e');
-  // }
-  runApp(
-    FlashChat(),
-  );
+  try {
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    runApp(
+      FlashChat(),
+    );
+    log('Firebase initialized successfully');
+  } catch (e) {
+    log('Error initializing Firebase: $e');
+  }
 }
 
 class FlashChat extends StatefulWidget {
