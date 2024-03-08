@@ -1,4 +1,4 @@
-import 'package:flash_chat/services/login.dart';
+import 'package:flash_chat/services/register.dart';
 import 'package:flutter/material.dart';
 
 import 'package:rive/rive.dart';
@@ -94,7 +94,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         handsUp!.change(false);
                       }
                       if (isChecking == null) {
-                        print("Error: isChecking is null");
                         return;
                       }
                       isChecking!.change(true);
@@ -107,7 +106,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    focusNode: emailFocusNode,
+                    // focusNode: emailFocusNode,
                     textInputAction: TextInputAction.next,
                     onSubmitted: (_) {
                       FocusScope.of(context).requestFocus(passwordFocusNode);

@@ -1,4 +1,5 @@
 import 'package:flash_chat/screens/registration_screen.dart';
+import 'package:flash_chat/services/login.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 
@@ -12,6 +13,9 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   StateMachineController? controller;
 
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   SMIInput<bool>? isChecking;
   SMIInput<bool>? hands_up;
   SMIInput<bool>? trigSuccess;
@@ -19,6 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final textFieldFocusNode = FocusNode();
   bool _obscured = false;
+  bool _isLoading = false;
 
   void _toggleObscured() {
     setState(() {
@@ -27,6 +32,18 @@ class _LoginScreenState extends State<LoginScreen> {
         return; // If focus is on text field, don't unfocus
       textFieldFocusNode.canRequestFocus =
           false; // Prevents focus if tap on eye
+    });
+  }
+
+  // ignore: unused_element
+  void _handleLogin() {
+    setState(() {
+      _isLoading = true;
+    });
+
+    login(emailController, passwordController, context);
+    setState(() {
+      _isLoading = false;
     });
   }
 
@@ -73,6 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 10,
                   ),
                   TextField(
+                    controller: emailController,
                     onChanged: (value) {
                       if (hands_up != null) {
                         // Corrected variable name
@@ -98,6 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 10,
                   ),
                   TextField(
+                    controller: passwordController,
                     onChanged: (value) {
                       if (isChecking != null) {
                         isChecking!.change(false);
@@ -155,9 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     minWidth: size.width,
                     height: 50,
                     color: Color(0xFF305A6F),
-                    onPressed: () {
-                      // todo Login
-                    },
+                    onPressed: _handleLogin,
                     child: Text(
                       "Login",
                       style: TextStyle(color: Colors.white, fontSize: 16),
