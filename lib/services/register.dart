@@ -2,11 +2,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flash_chat/widgets/show_snackbar.dart';
 import 'package:flutter/material.dart';
 
+typedef void RegisterCallback();
+
 void createAccount(
-    TextEditingController emailController,
-    TextEditingController passwordController,
-    TextEditingController cPasswordController,
-    BuildContext context) async {
+  TextEditingController emailController,
+  TextEditingController passwordController,
+  TextEditingController cPasswordController,
+  BuildContext context,
+  RegisterCallback callback,
+) async {
   String email = emailController.text.trim();
   String password = passwordController.text.trim();
   String cpassword = cPasswordController.text.trim();
@@ -23,8 +27,10 @@ void createAccount(
         // push to home page
         showSnackBar("Logged in successful", context);
       }
+      callback();
     } on FirebaseAuthException catch (e) {
       showSnackBar("${e.message}", context);
+      callback();
     } catch (e) {
       showSnackBar("$e", context);
     }

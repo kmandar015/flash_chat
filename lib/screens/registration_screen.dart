@@ -1,4 +1,5 @@
 import 'package:flash_chat/services/register.dart';
+import 'package:flash_chat/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'package:rive/rive.dart';
@@ -31,6 +32,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final reenterPasswordFocusNode = FocusNode();
 
   bool _obscured = false;
+  bool _isLoading = false;
 
   void _toggleObscured() {
     setState(() {
@@ -190,24 +192,35 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   SizedBox(
                     height: 10,
                   ),
-                  MaterialButton(
-                    elevation: 5,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    minWidth: size.width,
-                    height: 50,
-                    color: Color(0xFF305A6F),
-                    onPressed: () {
-                      // todo Registration
-                      createAccount(emailController, passwordController,
-                          cpasswordController, context);
-                    },
-                    child: Text(
-                      "Register",
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
-                  ),
+                  _isLoading
+                      ? LoadingWidget(
+                          size: size,
+                        )
+                      : MaterialButton(
+                          elevation: 5,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          minWidth: size.width,
+                          height: 50,
+                          color: Color(0xFF305A6F),
+                          onPressed: () {
+                            // todo Registration
+                            setState(() {
+                              _isLoading = true;
+                            });
+                            createAccount(emailController, passwordController,
+                                cpasswordController, context, () {
+                              setState(() {
+                                _isLoading = false;
+                              });
+                            });
+                          },
+                          child: Text(
+                            "Register",
+                            style: TextStyle(color: Colors.white, fontSize: 16),
+                          ),
+                        ),
                   SizedBox(
                     height: 10,
                   ),

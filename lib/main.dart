@@ -35,6 +35,7 @@ class _FlashChatState extends State<FlashChat> {
       onGenerateRoute: MyRoutes.generateRoute,
       debugShowCheckedModeBanner: false,
       initialRoute: SplashScreen.id,
+      theme: ThemeData.dark(),
     );
   }
 }

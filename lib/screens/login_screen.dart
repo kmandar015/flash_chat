@@ -1,5 +1,6 @@
 import 'package:flash_chat/screens/registration_screen.dart';
 import 'package:flash_chat/services/login.dart';
+import 'package:flash_chat/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 
@@ -32,18 +33,6 @@ class _LoginScreenState extends State<LoginScreen> {
         return; // If focus is on text field, don't unfocus
       textFieldFocusNode.canRequestFocus =
           false; // Prevents focus if tap on eye
-    });
-  }
-
-  // ignore: unused_element
-  void _handleLogin() {
-    setState(() {
-      _isLoading = true;
-    });
-
-    login(emailController, passwordController, context);
-    setState(() {
-      _isLoading = false;
     });
   }
 
@@ -166,20 +155,33 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     height: 10,
                   ),
-                  MaterialButton(
-                    elevation: 5,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    minWidth: size.width,
-                    height: 50,
-                    color: Color(0xFF305A6F),
-                    onPressed: _handleLogin,
-                    child: Text(
-                      "Login",
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
-                  ),
+                  _isLoading
+                      ? LoadingWidget(size: size)
+                      : MaterialButton(
+                          elevation: 5,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          minWidth: size.width,
+                          height: 50,
+                          color: Color(0xFF305A6F),
+                          onPressed: () {
+                            //to do login
+                            setState(() {
+                              _isLoading = true;
+                            });
+                            login(emailController, passwordController, context,
+                                () {
+                              setState(() {
+                                _isLoading = false;
+                              });
+                            });
+                          },
+                          child: Text(
+                            "Login",
+                            style: TextStyle(color: Colors.white, fontSize: 16),
+                          ),
+                        ),
                   SizedBox(
                     height: 10,
                   ),
