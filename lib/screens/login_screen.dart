@@ -166,16 +166,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: 50,
                           color: Color(0xFF305A6F),
                           onPressed: () {
-                            //to do login
-                            setState(() {
-                              _isLoading = true;
-                            });
-                            login(emailController, passwordController, context,
-                                () {
-                              setState(() {
-                                _isLoading = false;
-                              });
-                            });
+                            login(
+                              emailController,
+                              passwordController,
+                              context,
+                            );
                           },
                           child: Text(
                             "Login",

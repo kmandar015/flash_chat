@@ -1,15 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flash_chat/models/UIHelper.dart';
+import 'package:flash_chat/models/UserModel.dart';
+import 'package:flash_chat/screens/CompleteProfile.dart';
 import 'package:flash_chat/widgets/show_snackbar.dart';
 import 'package:flutter/material.dart';
-
-typedef void RegisterCallback();
 
 void createAccount(
   TextEditingController emailController,
   TextEditingController passwordController,
   TextEditingController cPasswordController,
   BuildContext context,
-  RegisterCallback callback,
 ) async {
   String email = emailController.text.trim();
   String password = passwordController.text.trim();
@@ -20,19 +21,39 @@ void createAccount(
   } else if (cpassword != password) {
     showSnackBar("Password doesn't match", context);
   } else {
+    UserCredential? credential;
+
+    UIHelper.showLoadingDialog(context, "Creating new account..");
+
     try {
-      UserCredential userCredential = await FirebaseAuth.instance
+      credential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
-      if (userCredential.user != null) {
-        // push to home page
-        showSnackBar("Logged in successful", context);
-      }
-      callback();
-    } on FirebaseAuthException catch (e) {
-      showSnackBar("${e.message}", context);
-      callback();
-    } catch (e) {
-      showSnackBar("$e", context);
+    } on FirebaseAuthException catch (ex) {
+      Navigator.pop(context);
+
+      UIHelper.showAlertDialog(
+          context, "An error occured", ex.message.toString());
+    }
+
+    if (credential != null) {
+      String uid = credential.user!.uid;
+      UserModel newUser =
+          UserModel(uid: uid, email: email, fullname: "", profilepic: "");
+      await FirebaseFirestore.instance
+          .collection("users")
+          .doc(uid)
+          .set(newUser.toMap())
+          .then((value) {
+        print("New User Created!");
+        Navigator.popUntil(context, (route) => route.isFirst);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) {
+            return CompleteProfile(
+                userModel: newUser, firebaseUser: credential!.user!);
+          }),
+        );
+      });
     }
   }
 }

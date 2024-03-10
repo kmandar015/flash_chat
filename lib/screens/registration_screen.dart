@@ -205,16 +205,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           height: 50,
                           color: Color(0xFF305A6F),
                           onPressed: () {
-                            // todo Registration
-                            setState(() {
-                              _isLoading = true;
-                            });
-                            createAccount(emailController, passwordController,
-                                cpasswordController, context, () {
-                              setState(() {
-                                _isLoading = false;
-                              });
-                            });
+                            createAccount(
+                              emailController,
+                              passwordController,
+                              cpasswordController,
+                              context,
+                            );
                           },
                           child: Text(
                             "Register",
